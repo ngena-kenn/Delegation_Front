@@ -75,7 +75,7 @@
     color: rgb(165, 16, 68); 
     padding: 12px 24px; 
     text-align: center;
-    margin-left: 300px; 
+    margin-left: 270px; 
     text-decoration: none; 
     display: inline-block; 
     font-size: 20px;  
@@ -135,10 +135,7 @@ div[data-column-id='1']{
   max-width: 120% !important;
   width: 120% !important;
 }
-.dLyRAV{
-  font-size: 20px;
-  color: #fcdada;
-}
+
 .footer{
   background-color: #8f274f !important;
   padding-bottom: 50px;
@@ -149,20 +146,51 @@ div[data-column-id='1']{
 .rdt_Pagination{
  
   background-color: #8f274f !important;
-  padding-right: 500px !important;
+  padding-right: 600px !important;
   padding-top: 25px;
 }
+.rdt_Pagination span {
+  font-size: 20px;
+  color: #fcdada;
+}
+
 select{
   font-size: 18px !important;
   color: #fcdada !important;
 }
-.fyrdjl{
+
+.rdt_Pagination div button{
   background-color: #fcdada !important ;
 }
-.fyrdjl:hover{
+.rdt_Pagination div button:hover{
   background-color: #8f274f !important ;
 }
+.search{
+  padding: 20px;
+  background:url(../images/header.jpg);
+}
+.search input {
+  font-size: 15px;
+  padding:10px;
+  margin-left: 75%; 
+}
+.erreur{
+  margin-left: 500px;
+  margin-top: 200px;
+}
+.erreur h1{
+  font-size: 90px;
+  color: #8f274f;
+  margin-left: 40px;
+}
+.erreur h2{
+  font-size: 40px;
+  color: #8f274f;
+}
+.erreur h3{
+  font-size: 20px;
+  margin-left: 15px;
+  color: #8f274f;
 
-
-
+}
 

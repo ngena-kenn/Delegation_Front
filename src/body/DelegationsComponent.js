@@ -3,6 +3,8 @@ import DataTable from 'react-data-table-component';
 import api from "./api";
 import download from 'downloadjs';
 import "../css/page.css";
+import tableau from './TableauDel';
+
 
 class Delegations extends Component{
 
@@ -11,11 +13,23 @@ class Delegations extends Component{
         this.state = {
           delegations: [],
           loading : false,
+          search : "",
         };
     }
 
+    handleSearch = (e) =>{
+        let value = e.target.value; 
+        this.setState(prevState =>({...prevState,search:(value)}))
+    }
+    getDelegationsData (){
+        const {delegations, search} = this.state;
+         return delegations.filter((row)=>{
+            return row.nom.toLowerCase().startsWith(search.toLowerCase());
+        }) 
+    }
+
     componentDidMount() {
-        console.log("Enter component.");
+        console.log("Enter component.")
         this.setState(prevState => ({...prevState,loading:true}));
         /*
         explication
@@ -31,10 +45,15 @@ class Delegations extends Component{
             })
             
         
-          });
+          }, (error) => {
+            console.log(error);
+            this.setState({
+                loading:false,
+                delegations: []
+            })
+          })
     
       }
-
 
       download(){
         console.log("Enter download");
@@ -45,83 +64,9 @@ class Delegations extends Component{
                 loading:false
             })
         })
-            
-        
-      
-
       }
 
     render(){  
-
-    
-        console.log(this.state.loading)
-        const columns = [
-        {
-            name:'id',
-            selector: row => row.id,
-        },
-        {
-            name:'nom',
-            selector: row => row.nom,
-        },
-        {
-            name:'numero',
-            selector: row => row.numero,
-        },
-        {
-            name:'complement',
-            selector: row => row.complement,
-        },
-        {
-            name:'voie',
-            selector: row => row.voie,
-        },
-        {
-            name:'boitePostal',
-            selector: row => row.boitePostale,
-        },
-        {
-            name:'etabAdresse4',
-            selector: row => row.etabAdresse4,
-        },
-        {
-            name:'codePostal',
-            selector: row => row.codePostal,
-        },
-        {
-            name:'ville',
-            selector: row => row.ville,
-        },
-        {
-            name:'codeNic',
-            selector: row => row.codeNic,
-        },
-        {
-            name:'telephone',
-            selector: row => row.telephone,
-        },
-        {
-            name:'email',
-            selector: row => row.email,
-        },
-        {
-            name:'longitude',
-            selector: row => row.longitude,
-        },
-        {
-            name:'latitude',
-            selector: row => row.latitude,
-        },
-        {
-            name:'manager',
-            selector:  row =>  [row.manager.nom, " " ,row.manager.prenom], 
-        },
-      
-    
-    ]
-    
-    
-    
     
     const paginationComponentOptions = {
         rowsPerPageText: 'Pagination',
@@ -136,28 +81,38 @@ class Delegations extends Component{
 
 
     //console.log("Enter render.");
-     
     if (this.state.loading){
         return (<div className='loader'></div>);
+  
+    }; 
+    if (delegations.length === 0 ){
+        return(<div className='erreur'>
+            <h1>oups !</h1>
+            <h2>Il y'a une erreur</h2>
+            <h3>Merci de réessayer plus tard</h3></div>);
     };
-      
 
         return(
             <div >
-            <DataTable
-                columns={columns}
-                data={delegations}
-                //progressPending={loading}
-                pagination 
-                paginationComponentOptions={paginationComponentOptions}
+                <div className='search'>
+                    <input
+                        type="text"
+                        name="searchBar"
+                        id="searchBar"
+                        placeholder="Recherche"
+                        onChange={this.handleSearch}
+                    />
+                </div>
+                <DataTable
+                    columns={tableau}
+                    data={this.getDelegationsData()}
+                    //progressPending={loading}
+                    pagination 
+                    paginationComponentOptions={paginationComponentOptions}
             
-        />
-                
-           
-          <div className='footer'><button className='button' onClick={() =>this.download()}>Télécharger</button></div>
-        
-
-        </div>
+                />
+                <div className='footer'><button className='button' onClick={() =>this.download()}>Télécharger</button></div>
+            </div>
           
         )
     
