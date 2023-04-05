@@ -99,7 +99,7 @@ class Delegations extends Component{
                         type="text"
                         name="searchBar"
                         id="searchBar"
-                        placeholder="Recherche"
+                        placeholder="Rechercher un nom"
                         onChange={this.handleSearch}
                     />
                 </div>

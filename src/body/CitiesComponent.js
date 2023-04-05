@@ -100,7 +100,7 @@ class Cities extends Component{
                     type="text"
                     name="searchBar"
                     id="searchBar"
-                    placeholder="Recherche"
+                    placeholder="Rechercher un local"
                     onChange={this.handleSearch}
                 />
             </div>
